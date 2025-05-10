@@ -19,7 +19,7 @@ const donorStore = useDonorStore();
 onMounted(() => {
   window.Moyasar.init({
     element: ".mysr-form",
-    amount: donorStore.selectedAmount,
+    amount: donorStore.selectedAmount * 100,
     currency: "SAR",
     description: "Donation",
     publishable_api_key: "pk_test_2Ftd31JoJvPQhbYrKdmyPdr7HsfPVFZF8Q1mEs5e",
