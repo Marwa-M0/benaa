@@ -27,7 +27,7 @@
           <span>دفع مخصص</span>
         </div>
 
-        <div class="w-full mt-6 flex items-center">
+        <div class="w-full mt-6 flex items-center m-auto">
           <!-- <component :is="useMoyasar ? 'MoyasarPayment' : 'CustomPayment'" /> -->
           <component :is="useMoyasar ? MoyasarPayment : PaymentOptionsCard" />
         </div>
