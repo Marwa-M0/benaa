@@ -19,9 +19,20 @@
         </div>
       </template>
 
-      <!-- Show payment card after user clicks pay -->
+      <!-- Show payment card -->
       <template v-else>
-        <MoyasarPayment />
+        <div class="flex items-center gap-4">
+          <span>الدفع عبر ميسر</span>
+          <UToggle v-model="useMoyasar" />
+          <span>دفع مخصص</span>
+        </div>
+
+        <div class="w-full mt-6">
+          <!-- <component :is="useMoyasar ? 'MoyasarPayment' : 'CustomPayment'" /> -->
+          <component
+            :is="useMoyasar ? 'MoyasarPayment' : 'PaymentOptionsCard'"
+          />
+        </div>
       </template>
     </div>
   </div>
@@ -30,14 +41,15 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import Hero from "@/components/ui/Hero.vue";
 import DonationCard from "@/components/cards/DonationCard.vue";
 import DonorNameCard from "@/components/cards/DonorNameCard.vue";
 import SuccessModal from "@/components/modals/SuccessModal.vue";
 import { useDonationStore } from "@/stores/donation/donationStore";
-// import PaymentOptionsCard from "@/components/cards/PaymentOptionsCard.vue";
 import MoyasarPayment from "@/components/cards/MoyasarPayment.vue";
-
+//import CustomPayment from "@/components/cards/CustomPayment.vue";
+import PaymentOptionsCard from "@/components/cards/PaymentOptionsCard.vue";
 definePageMeta({
   layout: "default",
 });
@@ -46,6 +58,7 @@ const donationStore = useDonationStore();
 const successModalRef = ref(null);
 
 const showPayment = ref(false);
+const useMoyasar = ref(true);
 
 const handleDonation = async () => {
   showPayment.value = true;
@@ -54,8 +67,8 @@ const handleDonation = async () => {
     // successModalRef.value?.openModal();
   }
 };
-
 </script>
+
 
 <style scoped>
 button {
