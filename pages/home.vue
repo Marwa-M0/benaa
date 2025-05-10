@@ -29,9 +29,7 @@
 
         <div class="w-full mt-6">
           <!-- <component :is="useMoyasar ? 'MoyasarPayment' : 'CustomPayment'" /> -->
-          <component
-            :is="useMoyasar ? 'MoyasarPayment' : 'PaymentOptionsCard'"
-          />
+          <component :is="useMoyasar ? MoyasarPayment : PaymentOptionsCard" />
         </div>
       </template>
     </div>

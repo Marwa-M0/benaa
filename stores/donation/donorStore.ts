@@ -17,6 +17,7 @@ export const useDonorStore = defineStore("donor", {
   actions: {
     setAmount(amount: number) {
       this.selectedAmount = this.selectedAmount === amount ? null : amount;
+      localStorage.setItem("donationAmount", this.selectedAmount);
       this.customAmount = "";
       this.errors.amount = "";
     },

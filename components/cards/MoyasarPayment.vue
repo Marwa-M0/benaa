@@ -14,16 +14,20 @@
 import { onMounted } from "vue";
 import { useDonorStore } from "@/stores/donation/donorStore";
 import Title from "@/components/ui/Title.vue";
+
 const donorStore = useDonorStore();
+const selectedAmount =
+  donorStore.selectedAmount || Number(localStorage.getItem("donationAmount"));
+const DonationAmount = selectedAmount * 100;
 
 onMounted(() => {
   window.Moyasar.init({
     element: ".mysr-form",
-    amount: donorStore.selectedAmount * 100,
+    amount: DonationAmount,
     currency: "SAR",
     description: "Donation",
     publishable_api_key: "pk_test_2Ftd31JoJvPQhbYrKdmyPdr7HsfPVFZF8Q1mEs5e",
-    callback_url: "http://localhost:3000/thanks",
+    callback_url: `${window.location.origin}/thanks`,
     methods: ["creditcard"],
     tokenize: true,
     credit_card: {
