@@ -242,7 +242,6 @@ const initiatePayment = async (token: string) => {
     );
     console.log("Token:", token);
     const params = new URLSearchParams({
-      id,
       token,
       amount: DonationAmount.value.toString(),
       currency: "SAR",
