@@ -22,7 +22,7 @@
         </div>
 
         <div class="w-full flex justify-center">
-          <div class="w-full md:w-[50%] lg:w-[100%]">
+          <div class="w-full md:w-[50%] lg:w-[50%]">
             <component :is="useMoyasar ? MoyasarPayment : CustomPaymentCard" />
           </div>
         </div>
