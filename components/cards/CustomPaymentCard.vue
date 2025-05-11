@@ -202,7 +202,6 @@ const handlePayment = async () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(tokenData),
-      token: response.token,
     });
 
     const data = await response.json();
