@@ -202,6 +202,7 @@ const handlePayment = async () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(tokenData),
+      token: response.token,
     });
 
     const data = await response.json();
@@ -241,6 +242,7 @@ const initiatePayment = async (token: string) => {
     );
     console.log("Token:", token);
     const params = new URLSearchParams({
+      id,
       token,
       amount: DonationAmount.value.toString(),
       currency: "SAR",
