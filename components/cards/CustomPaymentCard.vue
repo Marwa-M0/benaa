@@ -285,10 +285,10 @@ onMounted(() => {
         selectedAmount.value
       );
       console.log("Token:", token);
-   const amount = selectedAmount.value;
+  //  const amount = selectedAmount.value;
       const params = new URLSearchParams({
         token,
-        amount,
+        DonationAmount,
         currency: "SAR",
         
       });
