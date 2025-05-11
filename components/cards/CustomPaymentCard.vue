@@ -132,7 +132,9 @@
   
   const isSubmitting = ref(false);
  
-  const selectedAmount = ref(donorStore.selectedAmount);
+  const selectedAmount =
+  donorStore.selectedAmount || Number(localStorage.getItem("donationAmount"));
+const DonationAmount = selectedAmount * 100;
 
 onMounted(() => {
 
