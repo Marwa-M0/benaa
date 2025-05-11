@@ -110,7 +110,8 @@
   import { ref, reactive, onMounted } from "vue";
   import { useDonorStore } from "@/stores/donation/donorStore";
   import Title from "@/components/ui/Title.vue";
-  
+  import { computed } from "vue";
+
   const donorStore = useDonorStore();
   
   const form = reactive({
@@ -134,18 +135,13 @@
  
   const selectedAmount =
   donorStore.selectedAmount || Number(localStorage.getItem("donationAmount"));
-const DonationAmount = selectedAmount * 100;
+  const DonationAmount = computed(() => selectedAmount * 100);
 
-onMounted(() => {
-
-  console.log("Mounted - Selected Amount:", selectedAmount.value);
-});
-
-  
   const formatCardNumber = () => {
     let value = form.cardNumber.replace(/\D/g, "");
     value = value.slice(0, 16);
-    form.cardNumber = value.replace(/(.{4})/g, "$1 ").trim();
+    form.cardNumber = value.match(/.{1,4}/g)?.join(" ") ?? "";
+
   };
   
   const handleExpiryDateInput = () => {
@@ -190,7 +186,7 @@ onMounted(() => {
     errors.cvv = "";
     errors.amount = "";
   
-    console.log("Handle Payment - Selected Amount:", selectedAmount.value);
+    console.log("Handle Payment - Selected Amount:", DonationAmount);
   
     if (!form.cardholderName) errors.cardholderName = "اسم حامل البطاقة مطلوب";
     if (!form.cardNumber || form.cardNumber.replace(/\s/g, "").length < 16)
@@ -219,9 +215,10 @@ onMounted(() => {
       }
     }
   
-    if (!selectedAmount.value) {
+if (!selectedAmount) {
   errors.amount = "يرجى تحديد مبلغ التبرع";
 }
+
   
     if (Object.values(errors).some((error) => error)) {
       console.log("Validation Errors:", errors);
@@ -282,16 +279,15 @@ onMounted(() => {
     try {
       console.log(
         "Initiate Payment - Selected Amount:",
-        selectedAmount.value
+       DonationAmount
       );
       console.log("Token:", token);
-  //  const amount = selectedAmount.value;
-      const params = new URLSearchParams({
-        token,
-        DonationAmount,
-        currency: "SAR",
-        
-      });
+const params = new URLSearchParams({
+  token,
+  amount: DonationAmount.valueOf.toString(),
+  currency: "SAR",
+});
+
       const redirectUrl = `http://localhost:3000/thanks?${params.toString()}`;
       console.log("Redirecting to:", redirectUrl);
       window.location.assign(redirectUrl);
