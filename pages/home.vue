@@ -2,7 +2,6 @@
   <Hero />
   <div class="flex flex-col items-center bg-gray-50 py-12">
     <div class="w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 gap-8">
-      <!-- Show these cards only before payment -->
       <template v-if="!showPayment">
         <DonationCard />
         <DonorNameCard />
@@ -28,8 +27,7 @@
         </div>
 
         <div class="w-full mt-6 flex items-center m-auto">
-          <!-- <component :is="useMoyasar ? 'MoyasarPayment' : 'CustomPayment'" /> -->
-          <component :is="useMoyasar ? MoyasarPayment : PaymentOptionsCard" />
+          <component :is="useMoyasar ? MoyasarPayment : CustomPaymentCard" />
         </div>
       </template>
     </div>
@@ -46,8 +44,7 @@ import DonorNameCard from "@/components/cards/DonorNameCard.vue";
 import SuccessModal from "@/components/modals/SuccessModal.vue";
 import { useDonationStore } from "@/stores/donation/donationStore";
 import MoyasarPayment from "@/components/cards/MoyasarPayment.vue";
-//import CustomPayment from "@/components/cards/CustomPayment.vue";
-import PaymentOptionsCard from "@/components/cards/PaymentOptionsCard.vue";
+import CustomPaymentCard from "@/components/cards/CustomPaymentCard.vue";
 definePageMeta({
   layout: "default",
 });
