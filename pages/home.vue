@@ -6,13 +6,8 @@
         <DonationCard />
         <DonorNameCard />
         <div class="mt-4 md:w-[50%] lg:w-[48%] w-full">
-          <UButton
-            class="w-full bg-[#138B96] text-white font-bold py-3 rounded-lg text-center"
-            @click="handleDonation"
-            color="primary"
-            variant="solid"
-            block
-          >
+          <UButton class="w-full bg-[#138B96] text-white font-bold py-3 rounded-lg text-center" @click="handleDonation"
+            color="primary" variant="solid" block>
             ادفع الان
           </UButton>
         </div>
@@ -26,10 +21,13 @@
           <span>دفع مخصص</span>
         </div>
 
-        <div class="w-full mt-6 flex items-center m-auto">
-          <component :is="useMoyasar ? MoyasarPayment : CustomPaymentCard" />
+        <div class="w-full flex justify-center">
+          <div class="w-full md:w-[50%] lg:w-[48%]">
+            <component :is="useMoyasar ? MoyasarPayment : CustomPaymentCard" />
+          </div>
         </div>
       </template>
+
     </div>
   </div>
 
